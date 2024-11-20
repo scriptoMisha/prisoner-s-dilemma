@@ -2,6 +2,7 @@
 #include <map>
 #include <iostream>
 #include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -65,8 +66,6 @@ private:
     // тут внести чтение конфигурации из файла
     float probability_of_forgivness = 50;
 };
-typedef StrategyInterface *(*fInstantiator)();
-
 //std::function
 //std::callable
 
@@ -79,8 +78,8 @@ public:
         auto it = FactoryMap.find(id);
         if (it == FactoryMap.end())
         {
-
-            FactoryMap[id] = &instantiator<C>;
+            function<StrategyInterface*()> fun_obj = instantiator<C>;
+            FactoryMap[id] = fun_obj;
         }
         else
         {
@@ -94,13 +93,13 @@ public:
         return new C;
     }
     StrategyInterface *create(const string &id) const;
-    map<string, fInstantiator> &get_map()
+    map<string, function<StrategyInterface*()>> &get_map()
     {
         return FactoryMap;
     }
 
 private:
-    map<string, fInstantiator> FactoryMap;
+    map<string, function<StrategyInterface*()>> FactoryMap;
 };
 
 // s- silent (молчит) t - testifies - (свидетельствует)

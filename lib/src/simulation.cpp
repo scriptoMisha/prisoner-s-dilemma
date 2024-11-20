@@ -87,7 +87,7 @@ void Simulator::simulation() // 3 стратегии
             comp.print_winner();
         }
     }
-    cout << endl;
+    cout << "game is over" << endl;
 }
 
 void Simulator::parse_matrix()
