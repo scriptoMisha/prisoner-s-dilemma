@@ -101,7 +101,7 @@ char TitForTatWithForgivness::make_move(int n, vector<string> moves, int order)
 }
 
 
-StrategyInterface *StrategyFactory::create(const string &id) const
+unique_ptr<StrategyInterface> StrategyFactory::create(const string &id)
 {
     auto it = FactoryMap.find(id);
     if (it != FactoryMap.end())

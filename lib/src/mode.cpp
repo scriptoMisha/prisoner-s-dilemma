@@ -1,6 +1,6 @@
 #include "mode.h"
 #include <algorithm>
-void DetailedCompetition::play(StrategyInterface *strategy1, StrategyInterface *strategy2, int n, map<string, int[3]> matrix)
+void DetailedCompetition::play(unique_ptr<StrategyInterface>& strategy1, unique_ptr<StrategyInterface>& strategy2, int n, map<string, int[3]> matrix)
 {
     string player_inp;
     int count = 0;
@@ -46,7 +46,7 @@ void DetailedCompetition::play(StrategyInterface *strategy1, StrategyInterface *
 
 };
 
-void WithoutDetail::play(StrategyInterface *strategy1, StrategyInterface *strategy2, StrategyInterface *strategy3, int n, map<string, int[3]> &matrix)
+void WithoutDetail::play(unique_ptr<StrategyInterface>& strategy1, unique_ptr<StrategyInterface>& strategy2,unique_ptr<StrategyInterface>& strategy3, int n, map<string, int[3]> &matrix)
 {
     string moves;
     int count = 0;

@@ -45,3 +45,16 @@ TEST(prisonersDilemma, simpleTest2)
     // восстановление стандартного ввода
     std::cin.rdbuf(original_cin);
 }
+TEST(prisonersDilemma, simpleTest3)
+{
+    Simulator sim(0);
+}
+
+TEST(prisonersDilemma, simpleTest4)
+{
+    Simulator sim(7);
+    std::string input = "3 quit";
+    std::istringstream input_stream(input);
+    std::streambuf *original_cin = std::cin.rdbuf(input_stream.rdbuf());
+    std::cin.rdbuf(original_cin);
+}

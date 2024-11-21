@@ -1,4 +1,5 @@
 #include "simulation.h"
+#include "strategy.h"
 #include <fstream>
 
 Simulator::Simulator() : n(5)
@@ -53,8 +54,8 @@ void Simulator::simulation() // 3 стратегии
             string name2;
             cin >> name1;
             cin >> name2;
-            StrategyInterface *strat1 = factory.create(name1);
-            StrategyInterface *strat2 = factory.create(name2);
+            unique_ptr<StrategyInterface> strat1 = factory.create(name1);
+            unique_ptr<StrategyInterface> strat2 = factory.create(name2);
             // exception
             DetailedCompetition comp;
             comp.play(strat1, strat2, n, matrix);
@@ -71,9 +72,9 @@ void Simulator::simulation() // 3 стратегии
             cin >> name1;
             cin >> name2;
             cin >> name3;
-            StrategyInterface *strat1 = factory.create(name1);
-            StrategyInterface *strat2 = factory.create(name2);
-            StrategyInterface *strat3 = factory.create(name3);
+            unique_ptr<StrategyInterface> strat1 = factory.create(name1);
+            unique_ptr<StrategyInterface> strat2 = factory.create(name2);
+            unique_ptr<StrategyInterface> strat3 = factory.create(name3);
             // exception
             WithoutDetail comp;
             comp.play(strat1, strat2, strat3, n, matrix);

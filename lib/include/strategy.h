@@ -78,7 +78,7 @@ public:
         auto it = FactoryMap.find(id);
         if (it == FactoryMap.end())
         {
-            function<StrategyInterface*()> fun_obj = instantiator<C>;
+            function<unique_ptr<StrategyInterface>()> fun_obj = instantiator<C>;
             FactoryMap[id] = fun_obj;
         }
         else
@@ -88,18 +88,18 @@ public:
         }
     }
     template <class C>
-    static StrategyInterface *instantiator()
+    static unique_ptr<StrategyInterface> instantiator()
     {
-        return new C;
+        return std::make_unique<C>();
     }
-    StrategyInterface *create(const string &id) const;
-    map<string, function<StrategyInterface*()>> &get_map()
+    unique_ptr<StrategyInterface> create(const string &id);
+    map<string, function<unique_ptr<StrategyInterface>()>> &get_map()
     {
         return FactoryMap;
     }
 
 private:
-    map<string, function<StrategyInterface*()>> FactoryMap;
+    map<string, function<unique_ptr<StrategyInterface>()>> FactoryMap;
 };
 
 // s- silent (молчит) t - testifies - (свидетельствует)
